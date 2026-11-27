@@ -1,5 +1,6 @@
 import { Platform } from 'react-native';
 import * as Notifications from 'expo-notifications';
+import Constants from 'expo-constants';
 const CHANNEL_ID = 'laboratorio';
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -42,4 +43,14 @@ export async function showLocalNotification(): Promise<void> {
       seconds: 3,
     },
   });
+}
+
+export async function getExpoPushToken(): Promise<string> {
+  const allowed = await ensureNotificationPermission();
+  if (!allowed) throw new Error('Permiso denegado');
+  const projectId = Constants.expoConfig?.extra?.eas?.projectId ??
+    Constants.easConfig?.projectId;
+  if (!projectId) throw new Error('Falta projectId de EAS');
+  const result = await Notifications.getExpoPushTokenAsync({ projectId });
+  return result.data;
 }

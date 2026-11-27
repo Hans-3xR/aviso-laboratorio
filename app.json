@@ -16,10 +16,19 @@
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
+      "package": "pe.edu.pam.hnscr.pushlab",
+      "googleServicesFile": "./google-services.json",
       "predictiveBackGestureEnabled": false
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": ["expo-notifications"],
+    "extra": {
+      "eas": {
+        "projectId": "b770adea-5d5b-469d-906c-ae3d05295045"
+      }
+    },
+    "owner": "hns-cr"
   }
 }
